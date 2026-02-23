@@ -16,7 +16,7 @@ class Solution {
         return height(root) != -1;
     }
 
-    private int height(Node root) {
+    public int height(Node root) {
         if (root == null){
              return 0;
         }
