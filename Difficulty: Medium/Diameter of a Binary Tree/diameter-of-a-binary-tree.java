@@ -14,20 +14,16 @@ class Solution {
     int diameterr = 0;
     public int diameter(Node root) {
         // code here
-        if(root == null){
-            return 0;
-        }
-        height(root);
+        rec(root);
         return diameterr;
     }
-    public  int height(Node root){
+    int rec(Node root){
         if(root == null){
             return 0;
         }
-        int lh = height(root.left);
-        int rh = height(root.right);
-        diameterr = Math.max(diameterr , lh + rh );
-        return Math.max(lh , rh) + 1;
-        
+        int lh = rec(root.left);
+        int rh = rec(root.right);
+        diameterr = Math.max(diameterr , lh + rh);
+        return 1 + Math.max(lh , rh);
     }
 }
