@@ -11,11 +11,11 @@ class Node {
 } */
 
 class Solution {
-    int diameterr = 0;
+    int diameter = 0;
     public int diameter(Node root) {
         // code here
         rec(root);
-        return diameterr;
+        return diameter;
     }
     int rec(Node root){
         if(root == null){
@@ -23,7 +23,7 @@ class Solution {
         }
         int lh = rec(root.left);
         int rh = rec(root.right);
-        diameterr = Math.max(diameterr , lh + rh);
-        return 1 + Math.max(lh , rh);
+        diameter = Math.max(diameter , lh + rh);
+        return Math.max(lh ,rh) + 1;
     }
 }
