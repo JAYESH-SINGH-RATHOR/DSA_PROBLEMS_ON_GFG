@@ -14,18 +14,18 @@ class Node {
 class Solution {
     public boolean isBST(Node root) {
         // code here
-       return isvalidbst(root ,  null ,null);
+            return validate(root , null , null);
     }
-    boolean isvalidbst(Node root , Node max , Node min){
+    boolean validate(Node root , Node max , Node min){
         if(root == null){
             return true;
         }
-        if(min != null && root.data <= min.data){
+        else if(min != null && root.data <= min.data){
             return false;
         }
         else if(max != null && root.data >= max.data){
             return false;
         }
-        return isvalidbst(root.left , root , min) && isvalidbst(root.right , max , root);
+        return validate(root.left , root , min ) && validate(root.right , max , root);
     }
 }
