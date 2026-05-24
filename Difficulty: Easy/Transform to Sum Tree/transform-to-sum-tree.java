@@ -1,29 +1,27 @@
-/*Complete the Given Function
-
-Node is as follows:
-class Node{
+/* Structure for Tree Node
+class Node {
     int data;
-    Node left,right;
-    Node(int d){
-        data=d;
-        left=null;
-        right=null;
-    }
-}*/
+    Node left, right;
 
-class Solution {
-    public void toSumTree(Node root) {
-        // add code here.
-       height(root);
+    // Constructor
+    Node(int val) {
+        data = val;
+        left = null;
+        right = null;
     }
-    int height(Node root){
+};
+*/
+class Solution {
+    public int toSumTree(Node root) {
+        // code here
         if(root == null){
             return 0;
         }
+        int lh = toSumTree(root.left);
+        int rh = toSumTree(root.right);
+        
         int oldval = root.data;
-        int lh = height(root.left);
-        int rh = height(root.right);
-        root.data = lh + rh;
-        return root.data + oldval;
+        root.data = rh + lh;
+        return oldval + lh + rh;
     }
 }
