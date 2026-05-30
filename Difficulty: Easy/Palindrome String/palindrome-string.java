@@ -1,7 +1,6 @@
 class Solution {
     boolean isPalindrome(String s) {
         // code here
-        int n = s.length();
         int left = 0;
         int right = s.length() - 1;
         while(left < right){
