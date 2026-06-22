@@ -4,31 +4,25 @@ class Solution {
         if(s1.length() != s2.length()){
             return false;
         }
-        
-        int n = s1.length();
-        int m = s2.length();
-        
-        HashMap<Character , Integer > map = new HashMap<>();
-        
-        for(char e : s1.toCharArray()){
-            if(map.containsKey(e)){
-            int freq = map.get(e);
-                map.put(e , freq + 1);
-            }else{
-            map.put(e , 1);
+        HashMap<Character , Integer> map = new HashMap<>();
+        for(int i = 0 ; i < s1.length(); i++){
+            char ch = s1.charAt(i);
+            if(!map.containsKey(ch)){
+                map.put(ch , 0);
             }
+            map.put(ch , map.put(ch , 0) + 1);
         }
-        
-        for(char e : s2.toCharArray()){
-            if(!map.containsKey(e)){
+        for(int i = 0; i < s2.length(); i++){
+            char ch = s2.charAt(i);
+            if(!map.containsKey(ch)){
                 return false;
             }
-            int freq = map.get(e);
-            map.put(e , freq - 1);
-            if(map.get(e) == 0){
-                map.remove(e);
+            int freq = map.get(ch);
+            map.put(ch , freq - 1);
+            if(map.get(ch) < 0){
+                return false;
             }
         }
-        return map.isEmpty();
+        return true;
     }
 }
