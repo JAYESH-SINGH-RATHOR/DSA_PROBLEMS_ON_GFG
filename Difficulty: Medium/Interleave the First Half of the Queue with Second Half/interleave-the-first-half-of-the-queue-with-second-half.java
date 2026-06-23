@@ -1,19 +1,22 @@
+import java.util.*;
+
 class Solution {
     public void rearrangeQueue(Queue<Integer> q) {
-        // code here
+
+        int n = q.size();
+        int half = n / 2;
+
         Queue<Integer> firstHalf = new LinkedList<>();
-       int n = q.size();
-       
-       if(n % 2 != 0){
-           return;
-       }
-        for(int i = 0; i < n / 2; i++ ){
+
+        // Store first half
+        for(int i = 0; i < half; i++) {
             firstHalf.add(q.remove());
         }
-        while(!firstHalf.isEmpty()){
+
+        // Interleave
+        while(!firstHalf.isEmpty()) {
             q.add(firstHalf.remove());
             q.add(q.remove());
         }
-        
     }
 }
