@@ -1,18 +1,18 @@
 class Solution {
     public int getSecondLargest(int[] arr) {
-        int first = Integer.MIN_VALUE;
-        int sec = Integer.MIN_VALUE;
-
-        for(int i = 0; i < arr.length; i++) {
-            if(arr[i] > first) {
-                sec = first;
-                first = arr[i];
-            }
-            else if(arr[i] > sec && arr[i] != first) {
-                sec = arr[i];
+        // code here
+        int fs = Integer.MIN_VALUE;
+        int sc = Integer.MIN_VALUE;
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] > fs){
+                sc = fs;
+                fs = Math.max(fs , arr[i]);
+            }else if(arr[i] < fs && arr[i] > sc){
+                // System.out.print("arr[i] is = " + arr[i] +
+                // " sc is = " + sc);
+                sc = Math.max(sc , arr[i]);
             }
         }
-
-        return (sec == Integer.MIN_VALUE) ? -1 : sec;
+       return (sc == Integer.MIN_VALUE || fs == sc) ? -1 : sc;
     }
 }
