@@ -1,15 +1,18 @@
 class Solution {
     ArrayList<Integer> removeDuplicates(int[] arr) {
         // code here
-        ArrayList<Integer> list = new ArrayList<>();
-        int left = 0;
-        list.add(arr[0]);
-        for(int i = 1; i < arr.length; i++){
-            if(arr[left] != arr[i]){
-                list.add(arr[i]);
-                left = i;
+        ArrayList<Integer> res = new ArrayList<>();
+        HashSet<Integer> set = new HashSet<>();
+        for(int e : arr){
+            if(set.contains(e)){
+                set.remove(e);
             }
+            set.add(e);
         }
-        return list;
+        for(int e : set){
+            res.add(e);
+        }
+        Collections.sort(res);
+        return res;
     }
 }
