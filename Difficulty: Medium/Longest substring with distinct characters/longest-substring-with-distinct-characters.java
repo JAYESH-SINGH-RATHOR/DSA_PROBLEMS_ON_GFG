@@ -1,9 +1,9 @@
 class Solution {
     public int longestUniqueSubstr(String s) {
         // code here
-     int left = 0;
-     int max = 0;
      HashSet<Character> set = new HashSet<>();
+     int max = 0;
+     int left = 0;
      for(int i = 0; i < s.length(); i++){
          char ch = s.charAt(i);
          while(set.contains(ch)){
@@ -13,7 +13,6 @@ class Solution {
          set.add(ch);
          max = Math.max(max , i - left + 1);
      }
-    //  System.out.print(set);
      return max;
     }
 }
