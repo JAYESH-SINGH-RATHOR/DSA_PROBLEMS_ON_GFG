@@ -1,27 +1,36 @@
-/*
+/* Node Structure
 class Node {
     int data;
     Node next;
-    Node(int d)  { data = d;  next = null; }
-}
-*/
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+} */
 
 class Solution {
-    Node deleteMid(Node head) {
-        // This is method only submission.
-        // You only need to complete the method.
+    public Node deleteMid(Node head) {
+        // code here
         if(head == null || head.next == null){
             return null;
         }
-        Node fast = head;
-        Node slow = head;
-        Node prev = null;
-        while(fast != null && fast.next != null){
-            fast = fast.next.next;
-            prev = slow;
-            slow = slow.next;
+        int size = 0;
+        Node temp = head;
+        while(temp != null){
+            size++;
+            temp = temp.next;
         }
-        prev.next = slow.next;
+        // System.out.print(size);
+        temp = head;
+        int mid = size / 2;
+        Node prev = null;
+        int idx = 0;
+        while(idx < mid){
+            prev = temp;
+            temp = temp.next;
+            idx++;
+        }
+        prev.next = temp.next;
         return head;
     }
 }
