@@ -3,13 +3,12 @@ class Solution {
         // code here
         Arrays.sort(start);
         Arrays.sort(end);
-        int maxroom = 0;
-        int curroom  = 0;
         int i = 0;
         int j = 0;
-        int n = start.length;
-        while(i < n){
-            if(start[i] < end[j]){
+        int curroom = 0;
+        int maxroom = 0;
+        while(i < start.length){
+            if(start[i]  < end[j]){
                 curroom++;
                 i++;
             }else{
