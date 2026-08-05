@@ -9,7 +9,6 @@ class Solution {
                 pq.remove();
             }
         }
-        // System.out.print(pq);
         while(!pq.isEmpty()){
             res.add(pq.remove());
         }
