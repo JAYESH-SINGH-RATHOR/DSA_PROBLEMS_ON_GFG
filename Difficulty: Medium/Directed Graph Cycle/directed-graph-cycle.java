@@ -1,88 +1,42 @@
-    // using dfs 
-
-// class Solution {
-//     public boolean isCyclic(int V, int[][] edges) {
-//         // code here
-//         ArrayList<ArrayList<Integer>> adj  = new ArrayList<>();
-//         boolean visited[] = new boolean[V];
-//         boolean pathvisited[] = new boolean[V];
-//         for(int i = 0; i < V; i++){
-//             adj.add(new ArrayList<>());
-//         }
-//         for(int e[] : edges){
-//             int u = e[0];
-//             int v = e[1];
-//             adj.get(u).add(v);
-//         }
-//         for(int i = 0; i < V; i++){
-//             if(!visited[i]){
-//                 if(dfsUtil(adj , i , visited , pathvisited)){
-//                     return true;
-//                 }
-//             }
-//         }
-//         return false;
-//     }
-//     boolean dfsUtil( ArrayList<ArrayList<Integer>> adj  , int curr ,
-//     boolean visited[] , boolean pathvisited[]){
-//         visited[curr] = true;
-//         pathvisited[curr] = true;
-//         for(int e : adj.get(curr)){
-//             if(pathvisited[e]){
-//                 return true;
-//             }
-//             if(!visited[e]){
-//                 if(dfsUtil(adj , e , visited , pathvisited)){
-//                     return true;
-//                 }
-//             }
-//         }
-//         pathvisited[curr] = false;
-//         return false;
-//     }
-// }
-
-// using topological sort 
-
 class Solution {
     public boolean isCyclic(int V, int[][] edges) {
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        // Stack<Integer> st = new Stack<>();
+        // code here
         boolean visited[] = new boolean[V];
-        boolean pathvisited[] = new boolean[V];
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        boolean path[] = new boolean[V];
         for(int i = 0; i < V; i++){
             adj.add(new ArrayList<>());
         }
-        
         for(int e[] : edges){
-            int u = e[0];
+            int u= e[0];
             int v = e[1];
             adj.get(u).add(v);
         }
         for(int i = 0; i < V; i++){
             if(!visited[i]){
-                if(toposort(adj , i , pathvisited, visited)){
+                if(dfsUtil( i , path , visited , adj )){
                     return true;
                 }
             }
         }
         return false;
     }
-    boolean toposort(ArrayList<ArrayList<Integer>> adj , int curr ,
-     boolean pathvisited[] , boolean visited[] ){
+    boolean dfsUtil(int curr , boolean path[] , boolean visited[]
+    , ArrayList<ArrayList<Integer>> adj){
         visited[curr] = true;
-        pathvisited[curr] = true;
+        path[curr] = true;
         for(int e : adj.get(curr)){
-            if(pathvisited[e]){
+            if(path[e]){
                 return true;
             }
             if(!visited[e]){
-                if(toposort(adj , e ,pathvisited, visited )){
+                visited[e] = true;
+                if(dfsUtil(e , path , visited , adj)){
                     return true;
                 }
             }
         }
-        pathvisited[curr] = false;
+        path[curr] = false;
         return false;
     }
 }
