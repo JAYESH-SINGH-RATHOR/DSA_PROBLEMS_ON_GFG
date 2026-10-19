@@ -1,10 +1,7 @@
 class Solution {
-    public ArrayList<ArrayList<Integer>> getComponents(int V, 
-    int[][] edges) {
+    public ArrayList<ArrayList<Integer>> getComponents(int V, int[][] edges) {
         // code here
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
-        boolean visited[] = new boolean[V];
         for(int i = 0; i < V; i++){
             adj.add(new ArrayList<>());
         }
@@ -14,23 +11,28 @@ class Solution {
             adj.get(u).add(v);
             adj.get(v).add(u);
         }
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        boolean visited[] = new boolean[V];
+        Queue<Integer> q = new LinkedList<>();
         for(int i = 0; i < V; i++){
             if(!visited[i]){
-                 ArrayList<Integer> component = new ArrayList<>();
-                dfsutil(i , adj , visited , component);
-                res.add(component);
+                ArrayList<Integer> component = new ArrayList<>();
+                visited[i] = true;
+                q.add(i);
+               while(!q.isEmpty()){
+                   int curr = q.remove();
+                   component.add(curr);
+                   for(int e : adj.get(curr)){
+                       if(!visited[e]){
+                           visited[e] = true;
+                           q.add(e);
+                       }
+                   }
+               } 
+               res.add(component);
             }
         }
+       
         return res;
-    }
-    void dfsutil(int curr , ArrayList<ArrayList<Integer>> adj  ,
-    boolean visited[] ,ArrayList<Integer> component ){
-        visited[curr] = true;
-        component.add(curr);
-        for(int e : adj.get(curr)){
-            if(!visited[e]){
-                dfsutil(e , adj , visited , component);
-            }
-        }
     }
 }
