@@ -2,15 +2,16 @@ class Solution {
     public int countSCC(ArrayList<ArrayList<Integer>> adj) {
         // code here
         int n = adj.size();
-       boolean visited[] = new boolean[n];
-       Stack<Integer> st = new Stack<>();
+        int count = 0;
         ArrayList<ArrayList<Integer>> transpose = new ArrayList<>();
+        Stack<Integer> st = new Stack<>();
+        boolean visited[] = new boolean[n];
         for(int i = 0; i < n; i++){
             transpose.add(new ArrayList<>());
         }
         for(int i = 0; i < n; i++){
             if(!visited[i]){
-                dfs1(i , visited , st , adj);
+                dfs1(i , visited , adj , st);
             }
         }
         for(int i = 0; i < n; i++){
@@ -19,7 +20,6 @@ class Solution {
             }
         }
         visited = new boolean[n];
-        int count = 0;
         while(!st.isEmpty()){
             int curr = st.pop();
             if(!visited[curr]){
@@ -29,18 +29,18 @@ class Solution {
         }
         return count;
     }
-    void dfs1(int curr , boolean visited[] , Stack<Integer> st , 
-    ArrayList<ArrayList<Integer>> adj ){
+    void dfs1(int curr , boolean visited[] , ArrayList<ArrayList<Integer>>
+    adj , Stack<Integer> st){
         visited[curr] = true;
         for(int e : adj.get(curr)){
             if(!visited[e]){
-                dfs1(e , visited , st , adj);
+                dfs1(e , visited , adj , st);
             }
         }
         st.push(curr);
     }
-    void dfs2(int curr , boolean visited[] ,
-    ArrayList<ArrayList<Integer>> transpose){
+    void dfs2(int curr , boolean visited[] , ArrayList<ArrayList<Integer>>
+    transpose){
         visited[curr] = true;
         for(int e : transpose.get(curr)){
             if(!visited[e]){
