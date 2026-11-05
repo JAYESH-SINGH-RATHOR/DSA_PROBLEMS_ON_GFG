@@ -1,38 +1,27 @@
 class Solution {
-    public boolean isCycle(int V, int[][] edges) {
+    public boolean isCycle(ArrayList<ArrayList<Integer>> adj) {
         // Code here
-        boolean visited[] = new boolean[V];
-        List<Integer>adj [] = new ArrayList[V];
-        
-        for(int i = 0; i < V; i++){
-              adj[i] = new ArrayList<>();
-        }
-        
-        for(int e[] : edges){
-            int u = e[0];
-            int v = e[1];
-            adj[u].add(v);
-            adj[v].add(u);
-        }
-        for(int i = 0; i < V; i++){
+        int n = adj.size();
+        boolean visited[] = new boolean[n];
+        for(int i = 0; i < n; i++){
             if(!visited[i]){
-               if(cycledetectionutil(adj, i, -1, visited)){
+                if(dfsUtil(i , visited , adj , -1)){
                     return true;
                 }
             }
         }
         return false;
     }
-    boolean cycledetectionutil(List<Integer> adj [], int curr 
-    , int parent , boolean visited[]){
+    boolean dfsUtil(int curr ,  boolean visited[] , 
+    ArrayList<ArrayList<Integer>> adj , int parent){
         visited[curr] = true;
-        for(int e : adj[curr]){
+        for(int e : adj.get(curr)){
             if(!visited[e]){
-                if(cycledetectionutil(adj , e , curr , visited)){
+                if(dfsUtil(e , visited , adj , curr)){
                     return true;
                 }
             }
-            else if(e != parent){
+            else if( e != parent){
                 return true;
             }
         }
