@@ -1,42 +1,33 @@
 class Solution {
-    public boolean isCyclic(int V, int[][] edges) {
+    public boolean isCyclic(ArrayList<ArrayList<Integer>> adj){
         // code here
-        boolean visited[] = new boolean[V];
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        boolean path[] = new boolean[V];
-        for(int i = 0; i < V; i++){
-            adj.add(new ArrayList<>());
-        }
-        for(int e[] : edges){
-            int u= e[0];
-            int v = e[1];
-            adj.get(u).add(v);
-        }
-        for(int i = 0; i < V; i++){
+        int n = adj.size();
+        boolean visited[] = new boolean[n];
+        boolean stack[] = new boolean[n];
+        for(int i = 0; i < n; i++){
             if(!visited[i]){
-                if(dfsUtil( i , path , visited , adj )){
+                if(dfsUtil(i , visited , adj , stack)){
                     return true;
                 }
             }
         }
         return false;
     }
-    boolean dfsUtil(int curr , boolean path[] , boolean visited[]
-    , ArrayList<ArrayList<Integer>> adj){
+    boolean dfsUtil(int curr , boolean visited[] ,
+    ArrayList<ArrayList<Integer>> adj ,  boolean stack[]){
         visited[curr] = true;
-        path[curr] = true;
+        stack[curr] = true;
         for(int e : adj.get(curr)){
-            if(path[e]){
+            if(stack[e]){
                 return true;
             }
             if(!visited[e]){
-                visited[e] = true;
-                if(dfsUtil(e , path , visited , adj)){
-                    return true;
-                }
+               if( dfsUtil(e , visited , adj , stack)){
+                   return true;
+               }
             }
         }
-        path[curr] = false;
+        stack[curr] =  false;
         return false;
     }
 }
